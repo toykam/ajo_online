@@ -1,0 +1,9 @@
+import 'package:ajo_online/Pages/AuthPage/auth_endpoint.dart';
+import 'package:ajo_online/utils/api_helper.dart';
+
+class LoginPageAction {
+
+  static Future login({loginData}) async {
+    return ApiHelper.makePostRequest(url: loginEndpoint, data: loginData, useFormData: true);
+  }
+}
