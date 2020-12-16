@@ -39,6 +39,10 @@ class BaseProvider extends ChangeNotifier {
     setActionState = ActionState(actionStatus: ActionStatus.Info, message: message);
   }
 
+  bool isLoading() {
+    return [ActionStatus.Loading, ActionStatus.InProgress].contains(_actionState.actionStatus);
+  }
+
   BaseProvider() {
     backToLoading(message: 'Loading...');
   }

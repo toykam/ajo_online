@@ -1,8 +1,17 @@
+import 'package:ajo_online/Pages/MosqueFinderPage/MosqueListPage/mosque_list_provider.dart';
 import 'package:ajo_online/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MosqueListProvider())
+      ],
+      child: MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,6 +25,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       onGenerateRoute: (settings) => RouteGenerator.onGenerateRoute(settings),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -58,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, '/login'),
+        onPressed: () => Navigator.pushNamed(context, '/mosque_list'),
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
