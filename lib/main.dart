@@ -1,5 +1,6 @@
 import 'package:ajo_online/Pages/MosqueFinderPage/MosqueListPage/mosque_list_provider.dart';
 import 'package:ajo_online/utils/routes.dart';
+import 'package:ajo_online/utils/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +16,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,16 +54,24 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            AjoOnlineButton(
+              child: Text('Auth App'),
+              onPressed: () => Navigator.of(context).pushNamed('/login')
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            SizedBox(height: 10,),
+            AjoOnlineButton(
+              child: Text('Mosque App'),
+              onPressed: () => Navigator.of(context).pushNamed('/mosque_list')
+            ),
+            SizedBox(height: 10,),
+            AjoOnlineButton(
+              child: Text('Settings Page'),
+              onPressed: () => Navigator.of(context).pushNamed('/settings')
             ),
           ],
         ),

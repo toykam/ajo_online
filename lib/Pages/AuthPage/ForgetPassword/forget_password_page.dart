@@ -1,13 +1,13 @@
+import 'package:ajo_online/Pages/AuthPage/ForgetPassword/forget_password_page_provider.dart';
 import 'package:ajo_online/Pages/AuthPage/LoginPage/login_page_provider.dart';
 import 'package:ajo_online/utils/action_message_page.dart';
-import 'package:ajo_online/utils/base_provider.dart';
 import 'package:ajo_online/utils/style.dart';
 import 'package:ajo_online/utils/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
+class ForgetPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,16 +59,16 @@ class LoginPage extends StatelessWidget {
                     )
                   ]
                 ),
-                child: Consumer<LoginPageProvider>(
+                child: Consumer<ForgetPasswordPageProvider>(
                   builder: (context, value, child) {
                     return Column(
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Welcome', style: TextStyle(
+                        Text('Retrieve password', style: TextStyle(
                           fontSize: 32, fontWeight: FontWeight.w900
                         ),),
                         SizedBox(height: 1,),
-                        Text('Login to continue', style: TextStyle(
+                        Text('Don\'t remember your password? be have your back', style: TextStyle(
                           fontSize: 10, fontWeight: FontWeight.w400
                         ),),
                         SizedBox(height: 20,),
@@ -86,44 +86,41 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20,),
-                        Container(
-                          child: TextFormField(
-                            initialValue: '${value.password}',
-                            onChanged: (password) {
-                              value.backToLoaded();
-                              value.password = password;
-                            },
-                            obscureText: !value.passwordIsVisible,
-                            decoration: getInputDecoration(hintText: 'Password').copyWith(
-                              suffixIcon: InkWell(
-                                onTap: () => value.setPasswordIsVisible = !value.passwordIsVisible,
-                                child: Icon(value.passwordIsVisible ? Icons.visibility_off : Icons.visibility),
-                              ),
-                              prefixIcon: Icon(Icons.vpn_key)
-                            ),
-                          ),
-                        ),
+                        // SizedBox(height: 20,),
+                        // Container(
+                        //   child: TextFormField(
+                        //     initialValue: '${value.password}',
+                        //     onChanged: (password) {
+                        //       value.backToLoaded();
+                        //       value.password = password;
+                        //     },
+                        //     obscureText: !value.passwordIsVisible,
+                        //     decoration: getInputDecoration(hintText: 'Password').copyWith(
+                        //       suffixIcon: InkWell(
+                        //         onTap: () => value.setPasswordIsVisible = !value.passwordIsVisible,
+                        //         child: Icon(value.passwordIsVisible ? Icons.visibility_off : Icons.visibility),
+                        //       ),
+                        //       prefixIcon: Icon(Icons.vpn_key)
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(height: 50,),
                         Container(
                           child: AjoOnlineButton(
                             onPressed: () => value.verifyInput(context),
-                            child: value.isLoading() ? CupertinoActivityIndicator() : Text('Login', style: TextStyle(
+                            child: value.isLoading() ? CupertinoActivityIndicator() : Text('Retrieve password', style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.w300, fontSize: 16
                             ),),
                             color: Colors.black,
                           ),
                         ),
                         SizedBox(height: 15,),
-                        InkWell(
-                          onTap: () => Navigator.of(context).pushReplacementNamed('/forget_password'),
-                          child: Text('Forgot password?')
-                        ),
-                        SizedBox(height: 20,),
+                        // Text('Forgot password?'),
+                        // SizedBox(height: 20,),
                         Container(
                           child: AjoOnlineButton(
-                            onPressed: () => Navigator.of(context).pushNamed('/register'),
-                            child: Text('Register', style: TextStyle(
+                            onPressed: () => Navigator.of(context).pushNamed('/login'),
+                            child: Text('Login', style: TextStyle(
                               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16
                             ),),
                             color: Colors.white,

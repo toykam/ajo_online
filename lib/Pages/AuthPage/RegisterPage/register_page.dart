@@ -1,13 +1,13 @@
-import 'package:ajo_online/Pages/AuthPage/LoginPage/login_page_provider.dart';
 import 'package:ajo_online/utils/action_message_page.dart';
-import 'package:ajo_online/utils/base_provider.dart';
 import 'package:ajo_online/utils/style.dart';
 import 'package:ajo_online/utils/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
+import 'register_page_provider.dart';
+
+class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,20 +59,33 @@ class LoginPage extends StatelessWidget {
                     )
                   ]
                 ),
-                child: Consumer<LoginPageProvider>(
+                child: Consumer<RegisterPageProvider>(
                   builder: (context, value, child) {
                     return Column(
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Welcome', style: TextStyle(
+                        Text('Create an account', style: TextStyle(
                           fontSize: 32, fontWeight: FontWeight.w900
                         ),),
                         SizedBox(height: 1,),
-                        Text('Login to continue', style: TextStyle(
+                        Text('Start your contributions with us', style: TextStyle(
                           fontSize: 10, fontWeight: FontWeight.w400
                         ),),
                         SizedBox(height: 20,),
                         ActionMessagePage(actionState: value.getActionState,),
+                        SizedBox(height: 20,),
+                        Container(
+                          child: TextFormField(
+                            initialValue: '${value.fullname}',
+                            onChanged: (fullname) {
+                              value.backToLoaded();
+                              value.fullname = fullname;
+                            },
+                            decoration: getInputDecoration(hintText: 'Full name').copyWith(
+                              prefixIcon: Icon(Icons.person),
+                            ),
+                          ),
+                        ),
                         SizedBox(height: 20,),
                         Container(
                           child: TextFormField(
@@ -108,22 +121,19 @@ class LoginPage extends StatelessWidget {
                         Container(
                           child: AjoOnlineButton(
                             onPressed: () => value.verifyInput(context),
-                            child: value.isLoading() ? CupertinoActivityIndicator() : Text('Login', style: TextStyle(
+                            child: value.isLoading() ? CupertinoActivityIndicator() : Text('Register', style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.w300, fontSize: 16
                             ),),
                             color: Colors.black,
                           ),
                         ),
                         SizedBox(height: 15,),
-                        InkWell(
-                          onTap: () => Navigator.of(context).pushReplacementNamed('/forget_password'),
-                          child: Text('Forgot password?')
-                        ),
-                        SizedBox(height: 20,),
+                        Text('Already have an account?'),
+                        SizedBox(height: 15,),
                         Container(
                           child: AjoOnlineButton(
-                            onPressed: () => Navigator.of(context).pushNamed('/register'),
-                            child: Text('Register', style: TextStyle(
+                            onPressed: () => Navigator.of(context).pushReplacementNamed('/login'),
+                            child: Text('Login', style: TextStyle(
                               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16
                             ),),
                             color: Colors.white,

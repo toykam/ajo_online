@@ -18,10 +18,20 @@ class ActionMessagePage extends StatelessWidget {
       color = Colors.green.withOpacity(.5);
 
     return [ActionStatus.Loaded].contains(actionState.actionStatus) ? Container() : Container(
+      alignment: Alignment.center,
+      width: MediaQuery.of(context).size.width,
       child: Text('${actionState.message}'),
-      color: color,
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 50),
-      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      decoration: BoxDecoration(
+        color: color, borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: color.withOpacity(.5),
+            offset: Offset(0, 2), spreadRadius: 1, blurRadius: 5
+          )
+        ]
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10,),
     );
   }
 }
